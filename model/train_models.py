@@ -84,6 +84,9 @@ results_df = pd.DataFrame(results)
 print("\nEvaluation Metrics on 15% Test Data:")
 print(results_df)
 
+# Save metrics for README/update script
+results_df.to_csv(os.path.join(SAVE_DIR, "metrics.csv"), index=False)
+
 # Save test data for streamlit app
 test_data = pd.DataFrame(X_test)
 test_data['price_range'] = y_test
