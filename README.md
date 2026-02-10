@@ -22,31 +22,8 @@ The dataset is provided in `Data/train.csv` (2001 examples) and contains the fol
 - `Data/` - Contains `train.csv` and `test.csv` used for training/evaluation
 - `model/saved_models/` - Saved models, scaler, feature names, test split and metrics
 
-## Setup
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Running
-
-Train models and save artifacts:
-
-```bash
-python model/train_models.py
-```
-
-Start the Streamlit app:
-
-```bash
-streamlit run app.py
-```
 
 ## Evaluation Metrics
-
-The table below is automatically updated with evaluation metrics computed on the 15% test split saved when running `model/train_models.py`.
 
 <!-- METRICS_START -->
 
@@ -61,27 +38,13 @@ The table below is automatically updated with evaluation metrics computed on the
 
 <!-- METRICS_END -->
 
-## Notes
-
-- To update the metrics in this README after retraining, run:
-
-```bash
-python update_readme.py
-```
-
-This script reads `model/saved_models/metrics.csv` and replaces the metrics table above.
-
 ## Observations
-
-Below are concise observations on each model's performance based on the Evaluation Metrics table above. Interpretations reference the metrics (Accuracy, AUC, Precision, Recall, F1, Kappa) shown in the table.
-
 | Model | Observation |
 |---|---|
-| Logistic Regression | Strong overall accuracy and AUC indicate good linear separability for the majority of classes. Stable precision/recall values suggest balanced performance across classes. Good baseline model. |
-| Decision Tree | Lower accuracy and AUC compared to ensemble methods; may be overfitting on training data but underperforming on the held-out 15% test split. Consider pruning or limiting depth. |
-| K-Nearest Neighbors (KNN) | Relatively low accuracy and F1 indicate KNN struggles with this feature space (possibly due to scale or high dimensionality). Performance sensitive to `k` and feature scaling. |
-| Naive Bayes | Moderate performance; works well when feature independence assumption roughly holds. Fast to train but may be outperformed by tree-based ensembles on this dataset. |
-| Random Forest | High accuracy and AUC, with strong precision/recall and F1 — indicates ensemble reduces variance and captures non-linear patterns. Reliable choice for this dataset. |
-| XGBoost | Competitive or best-performing model in terms of AUC and accuracy; captures complex interactions and offers strong generalization when properly tuned. Good candidate for final model. |
+| Logistic Regression | Shows excellent and well-balanced performance across all metrics, indicating strong linear separability and reliable predictions. |
+| Decision Tree | Performs reasonably well but lags behind ensemble methods, suggesting overfitting or limited generalization.|
+| K-Nearest Neighbors (KNN) | Delivers poor performance, indicating sensitivity to feature scaling, noise, or an unsuitable choice of k. |
+| Naive Bayes | Achieves decent accuracy and high AUC, but lower overall performance suggests its independence assumption is limiting. |
+| Random Forest | Provides strong and stable results with high AUC and Kappa, demonstrating effective ensemble learning. |
+| XGBoost | Achieves near-optimal performance across all metrics, making it the best-performing model on this dataset. |
 
-These observations are qualitative summaries derived from the metrics table; run `python update_readme.py` after retraining to refresh the numeric table and confirm observations quantitatively.
